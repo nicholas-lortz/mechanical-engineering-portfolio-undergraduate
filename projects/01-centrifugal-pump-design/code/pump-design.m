@@ -158,27 +158,59 @@ end
 
 %% 8. SUMMARY
 fprintf('\n=== DESIGN SUMMARY ===\n');
-fprintf('Specific speed N_s            %8.1f\n',    N_s);
-fprintf('Shaft power                   %8.1f hp\n', P_s_hp);
-fprintf('Shaft diameter                %8.2f in\n', D_sh_in);
-fprintf('Eye diameter                  %8.2f in\n', d_e_in);
-fprintf('Inlet blade width             %8.2f in\n', b_1_in);
-fprintf('Impeller outer diameter       %8.2f in\n', d_2_in);
-fprintf('Outlet blade width            %8.2f in\n', b_2_in);
-fprintf('Blade count (computed / used) %5.2f / %d\n', Z_b, Z);
-fprintf('Solidity                      %8.2f\n',    sigma_solidity);
-fprintf('Diffusion factor              %8.3f\n',    diffusion_ratio);
-fprintf('Diffuser outlet diameter      %8.2f in\n', d_3_in);
-fprintf('Volute section (a x h)        %5.2f x %5.2f in\n', a_in, h_in);
-fprintf('Volute centroid radius        %8.2f in\n', r_c_in);
-fprintf('Volute iterations             %8d\n',      iter);
+
+fprintf('\n-- Specific speed and power --\n');
+fprintf('N_s (dimensional)              %9.1f\n',   N_s);
+fprintf('omega_s (non-dimensional)      %9.4f\n',   omega_s);
+fprintf('Shaft power                    %9.0f ft*lbf/s (%.1f hp)\n', P_s_ftlbfs, P_s_hp);
+fprintf('Shaft torque                   %9.1f ft*lbf\n', tau);
+
+fprintf('\n-- Inlet --\n');
+fprintf('Shaft diameter                 %9.2f in\n', D_sh_in);
+fprintf('Eye diameter                   %9.2f in\n', d_e_in);
+fprintf('Blade inlet diameter           %9.2f in\n', 2*r_1_in);
+fprintf('Inlet blade width, b_1         %9.2f in\n', b_1_in);
+fprintf('Inlet area                     %9.2f in^2\n', A_1_ft2 * in2_per_ft2);
+fprintf('Inlet velocity, V_1            %9.2f ft/s\n', V_1_fts);
+fprintf('Blade speed, U_1               %9.2f ft/s\n', U_1_fts);
+fprintf('Relative velocity, W_1         %9.2f ft/s\n', W_1_fts);
+fprintf('Relative flow angle            %9.2f deg\n', beta_f1_deg);
+
+fprintf('\n-- Outlet --\n');
+fprintf('Impeller outer diameter        %9.2f in\n', d_2_in);
+fprintf('Blade count (computed / used)  %6.2f / %d\n', Z_b, Z);
+fprintf('Blade speed, U_2               %9.2f ft/s\n', U_2_fts);
+fprintf('Slip factor                    %9.4f\n', mu_s);
+fprintf('Tangential velocity, V_u2      %9.2f ft/s\n', V_u2_fts);
+fprintf('Radial velocity, V_r2          %9.2f ft/s\n', V_r2_fts);
+fprintf('Relative velocity, W_2         %9.2f ft/s\n', W_2_fts);
+fprintf('Outlet area                    %9.2f in^2\n', A_2_in2);
+fprintf('Outlet blade width, b_2        %9.2f in\n', b_2_in);
+
+fprintf('\n-- Blade profile --\n');
+fprintf('Total wrap angle               %9.2f deg\n', theta_deg(end));
+fprintf('Total blade length             %9.2f in\n', L_in(end));
+fprintf('Solidity                       %9.4f\n', sigma_solidity);
+fprintf('Diffusion factor               %9.4f\n', diffusion_ratio);
+
+fprintf('\n-- Diffuser and volute --\n');
+fprintf('Diffuser outlet diameter       %9.2f in\n', d_3_in);
+fprintf('Throat velocity                %9.2f ft/s\n', V_t_fts);
+fprintf('Throat area                    %9.2f in^2\n', A_t_in2);
+fprintf('Volute section area            %9.2f in^2\n', A_theta_in2);
+fprintf('Volute section (a x h)         %5.2f x %5.2f in\n', a_in, h_in);
+fprintf('Volute centroid radius         %9.2f in\n', r_c_in);
+fprintf('Volute tangential velocity     %9.1f in/s\n', V_theta_ins);
+fprintf('Volute iterations              %9d\n', iter);
 
 if make_plots
     figure; hold on; axis equal; grid on;
     t = linspace(0, 2*pi, 200);
+    r_fine     = linspace(r_in(1), r_in(end), 300);
+    theta_fine = interp1(r_in, theta_deg, r_fine, 'pchip');   % smooth curve through computed points
     for k = 0:Z-1
-        ang = theta_deg + k * 360 / Z;
-        plot(r_in .* cosd(ang), r_in .* sind(ang), 'b', 'LineWidth', 1.5);
+        ang = theta_fine + k * 360 / Z;
+        plot(r_fine .* cosd(ang), r_fine .* sind(ang), 'b', 'LineWidth', 1.5);
     end
     plot(r_1_in * cos(t), r_1_in * sin(t), 'k--');
     plot(r_2_in * cos(t), r_2_in * sin(t), 'k-');
