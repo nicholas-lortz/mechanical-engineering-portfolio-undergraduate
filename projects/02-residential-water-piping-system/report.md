@@ -14,7 +14,7 @@ The extended Bernoulli equation, with major and minor losses, is rearranged in t
 | 2 | Drawn copper | 1.27 cm | 8 m | 6 m rise; 2 short-radius 90° elbows, 2 inline tees, 1 fully open globe valve; abrupt contraction to section 3 |
 | 3 | Drawn copper | 0.95 cm | 1 m | 1 m rise; discharge to atmosphere through a showerhead (K = 1.5) |
 
-Water is supplied at 20 °C (ρ = 998.2 kg/m³, ν = 1.004×10⁻⁶ m²/s). A drawing of the system is in [figures/piping_diagram.pdf](figures/piping_diagram.pdf).
+Water is supplied at 20 °C (ρ = 998.2 kg/m³, ν = 1.004×10⁻⁶ m²/s). A drawing of the system is in [figures/piping-diagram.png](figures/piping-diagram.png).
 
 ## 2. Method
 
