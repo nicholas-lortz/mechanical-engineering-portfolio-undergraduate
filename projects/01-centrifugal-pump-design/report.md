@@ -161,4 +161,4 @@ The volute cross-section is trapezoidal with a 30° included side angle. Section
 
 ## Reproducing the Results
 
-Open [`code/pump_design.m`](../code/pump_design.m) in MATLAB and run it. Inputs are set at the top of the file, and the summary printed to the command window matches the tables above.
+Open [`code/pump-design.m`](../code/pump-design.m) in MATLAB and run it. Inputs are set at the top of the file, and the summary printed to the command window matches the tables above.
