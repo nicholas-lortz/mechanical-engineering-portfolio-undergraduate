@@ -1,6 +1,6 @@
 # Centrifugal Water Pump Design
 
-Design report for a centrifugal water pump (Fluid Machinery). Every value below is produced by [`code/pump_design.m`](../code/pump_design.m), which prints a full summary when run in MATLAB.
+Design report for a centrifugal water pump (Fluid Machinery). Every value below is produced by [`code/pump-design.m`](../code/pump-design.m), which prints a full summary when run in MATLAB.
 
 ## Requirements
 
